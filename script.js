@@ -1,20 +1,17 @@
-function displayUTCTimeMilliseconds() {
-  const utcTimeMillisecondsElement = document.querySelector('[data-testid="currentUTCTime"');
-  
-  setInterval(() => {
-      const currentTimeMillis = new Date().getTime();
-      utcTimeMillisecondsElement.textContent = `${currentTimeMillis}`;
-  }, 1000);
+const main = () => {
+	const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+	const dateElem = document.querySelector('[data-testid="currentDayOfTheWeek"]')
+	const timeElem = document.querySelector('[data-testid="currentUTCTime"]')
+	const setValue = (elem, val) => {	elem.innerHTML = val }
+	setValue(dateElem, days[new Date().getUTCDay()])
+	window.setInterval(()=> {
+		setValue(dateElem, days[new Date().getUTCDay()])
+	}, 60000)
+	const timer = () => {
+		window.setInterval(() => {
+			setValue(timeElem, Date.now())
+			}, 100)
+ 	}
+	timer()
 }
-function displayDayOfWeek() {
-  const dayOfWeekElement = document.querySelector('[data-testid="currentDayOfTheWeek"]');
-  
-  setInterval(() => {
-      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-      const currentDayOfWeek = new Date().getDay();
-      dayOfWeekElement.textContent = `${days[currentDayOfWeek]}`;
-  }, 1000);
-}
-
-displayUTCTimeMilliseconds();
-displayDayOfWeek();
+window.addEventListener('DOMContentLoaded', (event) => { main() });
